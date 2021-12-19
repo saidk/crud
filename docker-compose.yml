@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:11-alpine
+    ports:
+    - 5432:5432
+    environment:
+      POSTGRES_DB: crud
+      POSTGRES_USER: crud
+      POSTGRES_PASSWORD: crud
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crud"]
+      interval: 10s
+      timeout: 60s
+      retries: 5
