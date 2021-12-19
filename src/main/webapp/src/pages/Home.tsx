@@ -6,22 +6,23 @@ import {useNavigate} from "react-router-dom";
 const Home = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [users, setUsers] = useState<ApiUser[]>([]);
-    const [reloadData, setReloadData] = useState<boolean>(false);
     const navigate = useNavigate();
 
     const deleteUser = (id: number | undefined) => {
         if (id !== undefined) {
-            axios.delete(`http://localhost:8080/users/` + id).then(r => setReloadData(true))
+            axios.delete(`http://localhost:8080/users/` + id).then(_ => setIsLoaded(false))
         }
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/users`)
-            .then(res => {
-                setIsLoaded(true);
-                setUsers(res.data);
-            })
-    }, [reloadData])
+        if (!isLoaded) {
+            axios.get(`http://localhost:8080/users`)
+                .then(res => {
+                    setIsLoaded(true);
+                    setUsers(res.data);
+                })
+        }
+    }, [isLoaded])
 
     return (
         isLoaded ? (
