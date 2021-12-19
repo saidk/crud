@@ -1,4 +1,4 @@
-## Prerequisites for development
+## Prerequisites for running the project
 - [Docker](https://www.docker.com/)
 - [Java 11](https://jdk.java.net/11/)
  
@@ -12,4 +12,4 @@ Frontend opens at `localhost:3000` and backend opens at `localhost:8080`
 ## Code verification
 
 ### Tests
-- Run backend tests using Intellij
+- Run backend tests using Intellij or with ./gradlew test
